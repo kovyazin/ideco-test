@@ -1,3 +1,11 @@
 import React from 'react'
 
-export const App = () => <h1>Hello world!</h1>
+import Button from '@material-ui/core/Button'
+
+export const App = () => {
+  return (
+    <Button color="primary" variant="contained">
+      Click me!
+    </Button>
+  )
+}
