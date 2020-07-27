@@ -1,11 +1,13 @@
 import React from 'react'
 
-import Button from '@material-ui/core/Button'
+import { BrowserRouter as Router } from 'react-router-dom'
+
+import { Pages } from '@pages'
 
 export const App = () => {
   return (
-    <Button color="primary" variant="contained">
-      Click me!
-    </Button>
+    <Router>
+      <Pages />
+    </Router>
   )
 }
