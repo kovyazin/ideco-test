@@ -6,7 +6,13 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Alert from '@material-ui/lab/Alert'
 import AlertTitle from '@material-ui/lab/AlertTitle'
 
-import { TodosTable, todosActions, todosSelectors } from '@features/todos'
+import {
+  TodosTable,
+  FiltersPanel,
+  SearchBar,
+  todosActions,
+  todosSelectors
+} from '@features/todos'
 import { MainTemplate } from '@ui'
 
 export const HomePage = () => {
@@ -25,7 +31,7 @@ export const HomePage = () => {
   }, [dispatch])
 
   return (
-    <MainTemplate sidebar={<h1>Sidebar</h1>}>
+    <MainTemplate sidebar={<FiltersPanel />} searchbar={<SearchBar />}>
       {isFetching && <CircularProgress />}
       {error && (
         <Alert severity="error">

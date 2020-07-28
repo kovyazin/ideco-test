@@ -14,13 +14,16 @@ const useStyles = makeStyles({
   }
 })
 
-export const MainTemplate = ({ children, sidebar }) => {
+export const MainTemplate = ({ children, sidebar, searchbar }) => {
   const classes = useStyles()
 
   return (
     <Container>
       <Box className={classes.wrapper}>
         <Grid spacing={3} container>
+          <Grid xs={12} item>
+            {searchbar}
+          </Grid>
           <Grid xs={3} item>
             {sidebar}
           </Grid>
@@ -35,5 +38,6 @@ export const MainTemplate = ({ children, sidebar }) => {
 
 MainTemplate.propTypes = {
   children: PropTypes.node.isRequired,
-  sidebar: PropTypes.node.isRequired
+  sidebar: PropTypes.node.isRequired,
+  searchbar: PropTypes.node.isRequired
 }
