@@ -17,7 +17,7 @@ import { MainTemplate } from '@ui'
 
 export const HomePage = () => {
   const dispatch = useDispatch()
-  const todos = useSelector(todosSelectors.todosList)
+  const filteredTodos = useSelector(todosSelectors.filteredTodosList)
   const isFetching = useSelector(todosSelectors.todosListIsFetching)
   const error = useSelector(todosSelectors.todosListError)
 
@@ -39,7 +39,7 @@ export const HomePage = () => {
           {error}
         </Alert>
       )}
-      {todos.length >= 1 && <TodosTable todos={todos} />}
+      {filteredTodos.length >= 1 && <TodosTable todos={filteredTodos} />}
     </MainTemplate>
   )
 }

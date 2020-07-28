@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
@@ -11,7 +11,7 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 
-import { todosSelectors } from '../model'
+import { todosSelectors, todosActions } from '../model'
 
 const useStyles = makeStyles({
   root: {
@@ -30,18 +30,27 @@ const useStyles = makeStyles({
 })
 
 export const FiltersPanel = () => {
+  const dispatch = useDispatch()
   const classes = useStyles()
   const users = useSelector(todosSelectors.usersList)
+  const filters = useSelector(todosSelectors.filters)
 
   const [values, setValues] = useState({
     status: 'all',
-    user: 'all'
+    userId: 'all'
   })
+
+  useEffect(() => {
+    setValues({
+      status: filters.status,
+      userId: filters.userId
+    })
+  }, [filters])
 
   const handleApplyFilters = (e) => {
     e.preventDefault()
 
-    console.log(values)
+    dispatch(todosActions.setFilters(values))
   }
 
   const handleChangeValue = (e) => {
@@ -82,10 +91,14 @@ export const FiltersPanel = () => {
           <FormLabel className={classes.formLabel} component="legend">
             Исполнитель
           </FormLabel>
-          <Select value={values.user} onChange={handleChangeValue} name="user">
+          <Select
+            value={values.userId}
+            onChange={handleChangeValue}
+            name="userId"
+          >
             <MenuItem value="all">Все</MenuItem>
             {users.map(({ name, id }) => (
-              <MenuItem key={id} value={name}>
+              <MenuItem key={id} value={id}>
                 {name}
               </MenuItem>
             ))}

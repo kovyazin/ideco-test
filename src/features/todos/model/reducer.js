@@ -6,7 +6,12 @@ const initialState = {
   todosListError: null,
   usersList: [],
   usersListIsFetching: false,
-  usersListError: null
+  usersListError: null,
+  filters: {
+    status: 'all',
+    userId: 'all'
+  },
+  searchValue: ''
 }
 
 export const reducer = (state = initialState, action) => {
@@ -47,6 +52,16 @@ export const reducer = (state = initialState, action) => {
         ...state,
         usersListIsFetching: false,
         error: action.payload
+      }
+    case types.SET_FILTERS:
+      return {
+        ...state,
+        filters: action.payload
+      }
+    case types.SET_SEARCH_VALUE:
+      return {
+        ...state,
+        searchValue: action.payload
       }
     default:
       return state
