@@ -57,3 +57,8 @@ export const setSearchValue = (value) => ({
   type: types.SET_SEARCH_VALUE,
   payload: value
 })
+
+export const deleteTodoItem = (id) => ({
+  type: types.DELETE_TODO_ITEM,
+  payload: id
+})

@@ -63,6 +63,13 @@ export const reducer = (state = initialState, action) => {
         ...state,
         searchValue: action.payload
       }
+    case types.DELETE_TODO_ITEM:
+      return {
+        ...state,
+        todosList: state.todosList.filter(
+          (todoItem) => todoItem.id !== action.payload
+        )
+      }
     default:
       return state
   }

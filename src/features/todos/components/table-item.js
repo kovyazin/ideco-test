@@ -1,7 +1,7 @@
 import React from 'react'
 
 import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
@@ -9,10 +9,15 @@ import Switch from '@material-ui/core/Switch'
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 
-import { todosSelectors } from '@features/todos'
+import { todosSelectors, todosActions } from '@features/todos'
 
 export const TableItem = ({ id, userId, completed, title }) => {
+  const dispatch = useDispatch()
   const user = useSelector(todosSelectors.user(userId))
+
+  const handleDeteteItemClick = () => {
+    dispatch(todosActions.deleteTodoItem(id))
+  }
 
   return (
     <TableRow key={id}>
@@ -22,7 +27,11 @@ export const TableItem = ({ id, userId, completed, title }) => {
       <TableCell>{title}</TableCell>
       <TableCell>{user.name}</TableCell>
       <TableCell align="right">
-        <IconButton color="secondary" aria-label="удалить">
+        <IconButton
+          onClick={handleDeteteItemClick}
+          color="secondary"
+          aria-label="удалить"
+        >
           <DeleteIcon />
         </IconButton>
       </TableCell>
