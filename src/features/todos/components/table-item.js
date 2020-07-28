@@ -15,20 +15,28 @@ export const TableItem = ({ id, userId, completed, title }) => {
   const dispatch = useDispatch()
   const user = useSelector(todosSelectors.user(userId))
 
-  const handleDeteteItemClick = () => {
+  const handleDeteteItem = () => {
     dispatch(todosActions.deleteTodoItem(id))
+  }
+
+  const handleToggleStatus = () => {
+    dispatch(todosActions.toggleTodoItemStatus(id))
   }
 
   return (
     <TableRow key={id}>
       <TableCell>
-        <Switch checked={completed} color="primary" />
+        <Switch
+          checked={completed}
+          onChange={handleToggleStatus}
+          color="primary"
+        />
       </TableCell>
       <TableCell>{title}</TableCell>
       <TableCell>{user.name}</TableCell>
       <TableCell align="right">
         <IconButton
-          onClick={handleDeteteItemClick}
+          onClick={handleDeteteItem}
           color="secondary"
           aria-label="удалить"
         >

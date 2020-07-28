@@ -70,6 +70,18 @@ export const reducer = (state = initialState, action) => {
           (todoItem) => todoItem.id !== action.payload
         )
       }
+    case types.TOGGLE_TODO_ITEM_STATUS:
+      return {
+        ...state,
+        todosList: state.todosList.map((todoItem) => {
+          if (todoItem.id !== action.payload) return todoItem
+
+          return {
+            ...todoItem,
+            completed: !todoItem.completed
+          }
+        })
+      }
     default:
       return state
   }

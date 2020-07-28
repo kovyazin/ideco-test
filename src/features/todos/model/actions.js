@@ -62,3 +62,8 @@ export const deleteTodoItem = (id) => ({
   type: types.DELETE_TODO_ITEM,
   payload: id
 })
+
+export const toggleTodoItemStatus = (id) => ({
+  type: types.TOGGLE_TODO_ITEM_STATUS,
+  payload: id
+})
