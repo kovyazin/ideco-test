@@ -67,3 +67,11 @@ export const toggleTodoItemStatus = (id) => ({
   type: types.TOGGLE_TODO_ITEM_STATUS,
   payload: id
 })
+
+export const changeTodoItemTitle = (id, title) => ({
+  type: types.CHANGE_TODO_ITEM_TITLE,
+  payload: {
+    id,
+    title
+  }
+})

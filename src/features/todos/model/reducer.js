@@ -82,6 +82,18 @@ export const reducer = (state = initialState, action) => {
           }
         })
       }
+    case types.CHANGE_TODO_ITEM_TITLE:
+      return {
+        ...state,
+        todosList: state.todosList.map((todoItem) => {
+          if (todoItem.id !== action.payload.id) return todoItem
+
+          return {
+            ...todoItem,
+            title: action.payload.title
+          }
+        })
+      }
     default:
       return state
   }
