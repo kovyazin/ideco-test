@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -33,12 +33,29 @@ export const FiltersPanel = () => {
   const classes = useStyles()
   const users = useSelector(todosSelectors.usersList)
 
+  const [values, setValues] = useState({
+    status: 'all',
+    user: 'all'
+  })
+
+  const handleApplyFilters = (e) => {
+    e.preventDefault()
+
+    console.log(values)
+  }
+
+  const handleChangeValue = (e) => {
+    const { value, name } = e.target
+
+    setValues((prevValues) => ({ ...prevValues, [name]: value }))
+  }
+
   return (
     <Paper className={classes.root}>
       <Typography className={classes.title} align="center">
         Фильтры
       </Typography>
-      <form>
+      <form onSubmit={handleApplyFilters}>
         <FormControl
           component="fieldset"
           variant="outlined"
@@ -47,7 +64,11 @@ export const FiltersPanel = () => {
           <FormLabel className={classes.formLabel} component="legend">
             Статус
           </FormLabel>
-          <Select>
+          <Select
+            value={values.status}
+            onChange={handleChangeValue}
+            name="status"
+          >
             <MenuItem value="all">Все</MenuItem>
             <MenuItem value="completed">Выполненные</MenuItem>
             <MenuItem value="uncompleted">Невыполненные</MenuItem>
@@ -61,7 +82,7 @@ export const FiltersPanel = () => {
           <FormLabel className={classes.formLabel} component="legend">
             Исполнитель
           </FormLabel>
-          <Select>
+          <Select value={values.user} onChange={handleChangeValue} name="user">
             <MenuItem value="all">Все</MenuItem>
             {users.map(({ name, id }) => (
               <MenuItem key={id} value={name}>
@@ -70,7 +91,7 @@ export const FiltersPanel = () => {
             ))}
           </Select>
         </FormControl>
-        <Button variant="outlined" color="primary" fullWidth>
+        <Button type="submit" variant="outlined" color="primary" fullWidth>
           Применить
         </Button>
       </form>
