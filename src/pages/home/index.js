@@ -14,12 +14,15 @@ import {
   todosSelectors
 } from '@features/todos'
 import { MainTemplate } from '@ui'
+import { useTitle } from '@lib/title'
 
 export const HomePage = () => {
   const dispatch = useDispatch()
   const filteredTodos = useSelector(todosSelectors.filteredTodosList)
   const isFetching = useSelector(todosSelectors.todosListIsFetching)
   const error = useSelector(todosSelectors.todosListError)
+
+  useTitle(`Всего ${filteredTodos.length}`)
 
   useEffect(() => {
     const request = async () => {
