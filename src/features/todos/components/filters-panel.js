@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
@@ -11,7 +11,7 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 
-import { todosActions, todosSelectors } from '../model'
+import { todosSelectors } from '../model'
 
 const useStyles = makeStyles({
   root: {

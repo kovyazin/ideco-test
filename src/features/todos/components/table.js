@@ -27,6 +27,7 @@ export const TodosTable = ({ todos }) => {
         <TableBody>
           {todos.map(({ id, userId, completed, title }) => (
             <TableItem
+              key={id}
               id={id}
               userId={userId}
               completed={completed}

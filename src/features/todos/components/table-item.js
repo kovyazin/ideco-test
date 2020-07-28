@@ -14,8 +14,6 @@ import { todosSelectors } from '@features/todos'
 export const TableItem = ({ id, userId, completed, title }) => {
   const user = useSelector(todosSelectors.user(userId))
 
-  console.log(completed)
-
   return (
     <TableRow key={id}>
       <TableCell>
