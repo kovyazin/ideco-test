@@ -10,6 +10,7 @@ import FormLabel from '@material-ui/core/FormLabel'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
+import Box from '@material-ui/core/Box'
 
 import { todosSelectors, todosActions } from '../model'
 
@@ -40,6 +41,8 @@ export const FiltersPanel = () => {
     userId: 'all'
   })
 
+  const isNotInitial = values.status !== 'all' || values.userId !== 'all'
+
   useEffect(() => {
     setValues({
       status: filters.status,
@@ -51,6 +54,10 @@ export const FiltersPanel = () => {
     e.preventDefault()
 
     dispatch(todosActions.setFilters(values))
+  }
+
+  const handleClearFilters = () => {
+    dispatch(todosActions.setFilters({ status: 'all', userId: 'all' }))
   }
 
   const handleChangeValue = (e) => {
@@ -107,6 +114,13 @@ export const FiltersPanel = () => {
         <Button type="submit" variant="outlined" color="primary" fullWidth>
           Применить
         </Button>
+        {isNotInitial && (
+          <Box mt={2}>
+            <Button onClick={handleClearFilters} variant="outlined" fullWidth>
+              Сбросить
+            </Button>
+          </Box>
+        )}
       </form>
     </Paper>
   )
