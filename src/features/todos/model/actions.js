@@ -75,3 +75,21 @@ export const changeTodoItemTitle = (id, title) => ({
     title
   }
 })
+
+export const createTodoItem = ({ title, user }) => (dispatch) => {
+  dispatch(addUser(user))
+  dispatch(addTodoItem(title, user))
+}
+
+const addUser = (user) => ({
+  type: types.ADD_USER,
+  payload: user
+})
+
+const addTodoItem = (title, user) => ({
+  type: types.ADD_TODO_ITEM,
+  payload: {
+    title,
+    user
+  }
+})

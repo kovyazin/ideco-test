@@ -1,20 +1,31 @@
-import React from 'react'
+import React, { useEffect, Fragment } from 'react'
 
 import { BrowserRouter as Router } from 'react-router-dom'
-import { Provider } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 
 import { Pages } from '@pages'
-import { store } from '@lib/store'
+import { todosActions } from '@features/todos'
 
 export const App = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const request = async () => {
+      await dispatch(todosActions.fetchUsers())
+      dispatch(todosActions.fetchTodos())
+    }
+
+    request()
+  }, [dispatch])
+
   return (
-    <Provider store={store}>
+    <Fragment>
       <CssBaseline />
       <Router>
         <Pages />
       </Router>
-    </Provider>
+    </Fragment>
   )
 }

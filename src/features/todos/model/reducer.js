@@ -94,6 +94,35 @@ export const reducer = (state = initialState, action) => {
           }
         })
       }
+    case types.ADD_USER:
+      if (state.usersList.some((user) => user.name === action.payload))
+        return state
+
+      return {
+        ...state,
+        usersList: [
+          ...state.usersList,
+          {
+            id: state.usersList.length + 1,
+            name: action.payload
+          }
+        ]
+      }
+    case types.ADD_TODO_ITEM:
+      return {
+        ...state,
+        todosList: [
+          ...state.todosList,
+          {
+            id: state.todosList.length + 1,
+            title: action.payload.title,
+            completed: false,
+            userId: state.usersList.find(
+              (user) => user.name === action.payload.user
+            ).id
+          }
+        ]
+      }
     default:
       return state
   }
