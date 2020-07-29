@@ -15,6 +15,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Alert from '@material-ui/lab/Alert'
 import AlertTitle from '@material-ui/lab/AlertTitle'
 import SnackBar from '@material-ui/core/Snackbar'
+import Container from '@material-ui/core/Container'
 
 import { ContentCenter } from '@ui'
 import { todosActions, todosSelectors } from '@features/todos'
@@ -52,79 +53,84 @@ export const CreatePage = () => {
   }
 
   return (
-    <ContentCenter fullHeight>
-      <Card className={classes.card}>
-        <CardHeader
-          title="Добавление новой задачи"
-          titleTypographyProps={{ align: 'center' }}
-        />
-        <CardContent>
-          {todosIsFetching || usersIsFetching ? (
-            <CircularProgress />
-          ) : todosError || usersError ? (
-            <Alert severity="error">
-              <AlertTitle>Ошибка</AlertTitle>
-              Ошибка загрузки данных
-            </Alert>
-          ) : (
-            <Formik
-              onSubmit={handleCreateTodoSubmit}
-              validationSchema={validationSchema}
-              initialValues={{ title: '', user: '' }}
-            >
-              {({ handleSubmit }) => (
-                <Form onSubmit={handleSubmit}>
-                  <Field
-                    component={TextField}
-                    className={classes.field}
-                    name="title"
-                    size="small"
-                    variant="outlined"
-                    placeholder="Введите название задачи"
-                    fullWidth
-                  />
-                  <Field
-                    component={TextField}
-                    className={classes.field}
-                    name="user"
-                    size="small"
-                    variant="outlined"
-                    placeholder="Введите имя исполнителя"
-                    fullWidth
-                  />
-                  <Button
-                    type="submit"
-                    variant="outlined"
-                    color="primary"
-                    fullWidth
-                  >
-                    Добавить
-                  </Button>
-                </Form>
-              )}
-            </Formik>
-          )}
-        </CardContent>
-      </Card>
+    <Container>
+      <ContentCenter fullHeight>
+        <Card className={classes.card}>
+          <CardHeader
+            title="Добавление новой задачи"
+            titleTypographyProps={{ align: 'center' }}
+          />
+          <CardContent>
+            {todosIsFetching || usersIsFetching ? (
+              <CircularProgress />
+            ) : todosError || usersError ? (
+              <Alert severity="error">
+                <AlertTitle>Ошибка</AlertTitle>
+                Ошибка загрузки данных
+              </Alert>
+            ) : (
+              <Formik
+                onSubmit={handleCreateTodoSubmit}
+                validationSchema={validationSchema}
+                initialValues={{ title: '', user: '' }}
+              >
+                {({ handleSubmit }) => (
+                  <Form onSubmit={handleSubmit}>
+                    <Field
+                      component={TextField}
+                      className={classes.field}
+                      name="title"
+                      size="small"
+                      variant="outlined"
+                      placeholder="Введите название задачи"
+                      fullWidth
+                    />
+                    <Field
+                      component={TextField}
+                      className={classes.field}
+                      name="user"
+                      size="small"
+                      variant="outlined"
+                      placeholder="Введите имя исполнителя"
+                      fullWidth
+                    />
+                    <Button
+                      type="submit"
+                      variant="outlined"
+                      color="primary"
+                      fullWidth
+                    >
+                      Добавить
+                    </Button>
+                  </Form>
+                )}
+              </Formik>
+            )}
+          </CardContent>
+        </Card>
 
-      <SnackBar
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={isOpenNotification}
-        autoHideDuration={5000}
-        onClose={() => setIsOpenNotification(false)}
-      >
-        <Alert severity="success" onClose={() => setIsOpenNotification(false)}>
-          Задача была успешно создана
-        </Alert>
-      </SnackBar>
+        <SnackBar
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open={isOpenNotification}
+          autoHideDuration={5000}
+          onClose={() => setIsOpenNotification(false)}
+        >
+          <Alert
+            severity="success"
+            onClose={() => setIsOpenNotification(false)}
+          >
+            Задача была успешно создана
+          </Alert>
+        </SnackBar>
 
-      <Button
-        onClick={() => history.push('/')}
-        variant="outlined"
-        color="primary"
-      >
-        Вернуться на главную
-      </Button>
-    </ContentCenter>
+        <Button
+          onClick={() => history.push('/')}
+          variant="outlined"
+          color="primary"
+        >
+          Вернуться на главную
+        </Button>
+      </ContentCenter>
+    </Container>
   )
 }

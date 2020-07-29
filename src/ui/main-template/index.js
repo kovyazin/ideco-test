@@ -24,10 +24,10 @@ export const MainTemplate = ({ children, sidebar, searchbar }) => {
           <Grid xs={12} item>
             {searchbar}
           </Grid>
-          <Grid xs={3} item>
+          <Grid xs={12} sm={4} md={3} item>
             {sidebar}
           </Grid>
-          <Grid xs={9} item>
+          <Grid xs={12} sm={8} md={9} item>
             {children}
           </Grid>
         </Grid>
